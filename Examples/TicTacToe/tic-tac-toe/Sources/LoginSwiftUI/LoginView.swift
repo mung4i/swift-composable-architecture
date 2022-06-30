@@ -1,5 +1,7 @@
+import Accessors
 import AuthenticationClient
 import ComposableArchitecture
+import Identifiers
 import LoginCore
 import SwiftUI
 import TwoFactorCore
@@ -98,6 +100,11 @@ public struct LoginView: View {
       .alert(self.store.scope(state: \.alert), dismiss: .alertDismissed)
     }
     .navigationBarTitle("Login")
+    .background(
+        NavigationBarAccessor {
+            $0?.accessibilityIdentifier = LoginIdentifiers.title.rawValue
+        }
+    )
   }
 }
 
