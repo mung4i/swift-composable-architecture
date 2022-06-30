@@ -1,8 +1,10 @@
+import Accessors
 import AppCore
 import AppSwiftUI
 import AppUIKit
 import AuthenticationClientLive
 import ComposableArchitecture
+import Identifiers
 import SwiftUI
 
 private let readMe = """
@@ -45,8 +47,10 @@ struct RootView: View {
         Text(readMe)
 
         Section {
-          Button("SwiftUI version") { self.showGame = .swiftui }
-          Button("UIKit version") { self.showGame = .uikit }
+            Button("SwiftUI version") { self.showGame = .swiftui }
+                .accessibilityIdentifier(RootIdentifiers.btnSwiftUIVersion.rawValue)
+            Button("UIKit version") { self.showGame = .uikit }
+                .accessibilityIdentifier(RootIdentifiers.btnUIKitVersion.rawValue)
         }
       }
       .sheet(item: self.$showGame) { gameType in
@@ -57,6 +61,11 @@ struct RootView: View {
         }
       }
       .navigationBarTitle("Tic-Tac-Toe")
+      .background(
+        NavigationBarAccessor {
+            $0?.accessibilityIdentifier = RootIdentifiers.title.rawValue
+        }
+      )
     }
     .navigationViewStyle(.stack)
   }

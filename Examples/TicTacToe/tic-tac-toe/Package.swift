@@ -8,6 +8,7 @@ let package = Package(
     .iOS(.v14)
   ],
   products: [
+    .library(name: "Accessors", targets: ["Accessors"]),
     .library(name: "AppCore", targets: ["AppCore"]),
     .library(name: "AppSwiftUI", targets: ["AppSwiftUI"]),
     .library(name: "AppUIKit", targets: ["AppUIKit"]),
@@ -16,6 +17,7 @@ let package = Package(
     .library(name: "GameCore", targets: ["GameCore"]),
     .library(name: "GameSwiftUI", targets: ["GameSwiftUI"]),
     .library(name: "GameUIKit", targets: ["GameUIKit"]),
+    .library(name: "Identifiers", targets: ["Identifiers"]),
     .library(name: "LoginCore", targets: ["LoginCore"]),
     .library(name: "LoginSwiftUI", targets: ["LoginSwiftUI"]),
     .library(name: "LoginUIKit", targets: ["LoginUIKit"]),
@@ -30,6 +32,9 @@ let package = Package(
     .package(name: "swift-composable-architecture", path: "../../..")
   ],
   targets: [
+    .target(
+        name: "Accessors"
+    ),
     .target(
       name: "AppCore",
       dependencies: [
@@ -93,7 +98,9 @@ let package = Package(
       name: "GameUIKit",
       dependencies: ["GameCore"]
     ),
-
+    .target(
+        name: "Identifiers"
+    ),
     .target(
       name: "LoginCore",
       dependencies: [
@@ -109,6 +116,8 @@ let package = Package(
     .target(
       name: "LoginSwiftUI",
       dependencies: [
+        "Accessors",
+        "Identifiers",
         "LoginCore",
         "TwoFactorSwiftUI",
       ]
